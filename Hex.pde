@@ -8,6 +8,9 @@ class Hex {
   int armyAmount;
   int growthRate;
   int destination;
+  int sourceHex;
+  int destHex;
+  int attackingArmy;
   color col;
   float x;
   float y;
@@ -15,7 +18,7 @@ class Hex {
   int owner;
   int armyMax;
   float value; //what this hex is worth
-  
+
   Hex(int i, float xLoc, float yLoc, float w, float h, int o, ArrayList connArray) {
     //x,y values are for left center point of hex
     index = i;
@@ -64,14 +67,14 @@ class Hex {
       stroke(0);
       strokeWeight(1);
       //transport arrow 
-      
+
       line(centerX, centerY, hexes.get(destination).centerX, hexes.get(destination).centerY);
       if (index == hexes.get(destination).destination) {
         hexes.get(destination).destination = destination;
       }
     }
   }
-  
+
   void clicked() {
     if (dist(centerX, centerY, mouseX, mouseY) <= high && owner == 1) {
       weight = 2;
@@ -81,7 +84,7 @@ class Hex {
       weight = 1;
     }
   }
-  
+
   void goal() {
     if (dist(centerX, centerY, mouseX, mouseY) <= high) {
       for (int i = 0; i < hexes.get(index).connectedArray.size(); i++) {
