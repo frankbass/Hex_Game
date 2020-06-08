@@ -1,5 +1,8 @@
 ArrayList<Hex> hexes = new ArrayList();
 ArrayList<Bridge> bridges = new ArrayList();
+ArrayList<ArmyInTransit> armiesInTransit = new ArrayList();
+
+int clickedIndex;
 //ArrayList<Arrow> arrows = new ArrayList();
 //int amount = 12;
 float wide = 25;
@@ -62,3 +65,18 @@ void draw() {
   fill(0, 255, 0);
   text(playerScore, 200, height - 30);
 }
+
+//color playerColor(int playerIndex) {
+//  color output = color(0);
+//  ;
+//  if (playerIndex == 0) {
+//    output = color(100, 100, 100);
+//  }
+//  if (playerIndex == 1) {
+//    output = color(0, 255, 0);
+//  }
+//  if (playerIndex == 2) {
+//    output = color (255, 0, 0);
+//  }
+//  return output;
+//}

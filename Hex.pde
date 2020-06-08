@@ -8,8 +8,8 @@ class Hex {
   int armyAmount;
   int growthRate;
   int destination;
-  int sourceHex;
-  int destHex;
+  //int sourceHex;
+  //int destHex;
   int attackingArmy;
   color col;
   float x;
@@ -80,49 +80,70 @@ class Hex {
       weight = 2;
       attackingArmy = floor(armyAmount / 2);
       sourceHex = index;
+      clickedIndex = index;
     } else {
       weight = 1;
     }
   }
 
-  void goal() {
-    if (dist(centerX, centerY, mouseX, mouseY) <= high) {
-      for (int i = 0; i < hexes.get(index).connectedArray.size(); i++) {
-        if (hexes.get(index).connectedArray.get(i) == sourceHex) {
-          if (owner == hexes.get(sourceHex).owner) {
-            //just moving an army
-            armyAmount = armyAmount + attackingArmy;
-            hexes.get(sourceHex).armyAmount -= attackingArmy;
-            hexes.get(sourceHex).destination = index;
-          }
-          //attacking
-          else {
-            int difference = armyAmount - attackingArmy;
-            //win battle
-            if (difference < 0) {
-              owner = 1;
-              armyAmount = abs(difference);
-              colors();
-            }
-            //defeat
-            else {
-              armyAmount = armyAmount - attackingArmy;
-              hexes.get(sourceHex).armyAmount -= attackingArmy;
-            }
-          }
-        }
-      }
-    }
+  //void goal(int sourceHex, int destHex, int player) {
+
+  //  for (int i = 0; i < hexes.get(index).connectedArray.size(); i++) {
+  //    //are you connected
+  //    if (hexes.get(index).connectedArray.get(i) == sourceHex) {
+  //      //do you already own it
+  //      if (owner == hexes.get(sourceHex).owner) {
+  //        //move an army
+  //        armyAmount = armyAmount + attackingArmy;
+  //        hexes.get(sourceHex).armyAmount -= attackingArmy;
+  //        hexes.get(sourceHex).destination = index;
+  //      }
+  //      //attacking
+  //      else {
+  //        int difference = armyAmount - attackingArmy;
+  //        //win battle
+  //        if (difference < 0) {
+  //          owner = player;
+  //          armyAmount = abs(difference);
+  //          colors();
+  //        }
+  //        //defeat
+  //        else {
+  //          armyAmount = armyAmount - attackingArmy;
+  //          hexes.get(sourceHex).armyAmount -= attackingArmy;
+  //        }
+  //      }
+  //    }
+  //  }
+  //}
+
+  void depart(int destination) {
+    int movingArmy = int(armyAmount/2);
+    armyAmount = armyAmount - movingArmy;
+    ArmyInTransit tempArmy = new ArmyInTransit(movingArmy, hexes.size(), index, destination, hexes.get(index).owner);
+    armiesInTransit.add(tempArmy);
+
+    //create traveling army
+    //travel animation
+    //arrive
+    //attack
   }
 
-  void move() {
-    if (destination != index) {
-      int movingArmy = int(armyAmount/2);
-      armyAmount = armyAmount - movingArmy;
-      hexes.get(destination).armyAmount += movingArmy;
-    }
-  }
+  //move() , animate etc
+  //then attack()
+  //win? lose?
 
+
+  //void move() {
+  //  if (destination != index) {
+  //    int movingArmy = int(armyAmount/2);
+  //    armyAmount = armyAmount - movingArmy;
+  //    hexes.get(destination).armyAmount += movingArmy;
+  //  }
+  //}
+
+  //col = playerColor(owner);
+  //color(col);
   void colors() {
     if (owner == 0) {
       col = color(100, 100, 100);

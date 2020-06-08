@@ -1,3 +1,5 @@
+
+
 void mousePressed() {
   noCursor();
   pressed = true;
@@ -11,7 +13,13 @@ void mouseReleased() {
   cursor();
   pressed = false;
   for (int i = 0; i < hexes.size(); i++) {
-    hexes.get(i).goal();
+    float x = hexes.get(i).centerX;
+    float y = hexes.get(i).centerY;
+    if (dist(x, y, mouseX, mouseY) <= high) {
+      int destIndex = hexes.get(i).index;
+      hexes.get(clickedIndex).depart(destIndex);
+    }
+    
   }
   attackingArmy = 0;
 }

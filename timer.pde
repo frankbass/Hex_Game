@@ -2,7 +2,12 @@ void timer() {
   if (frameCount % 60 == 0) {
     for (int i = 0; i < hexes.size(); i++) {
       hexes.get(i).grow();
-      hexes.get(i).move();
+    }
+    for (int i = 0; i < armiesInTransit.size(); i ++) {
+     ArmyInTransit tempArmy = armiesInTransit.get(i);
+     tempArmy.update();
+     tempArmy.show();
+     tempArmy.arrival();
     }
     scoreKeeper();
     ai.owned();
